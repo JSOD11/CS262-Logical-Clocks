@@ -154,10 +154,14 @@ if __name__ == '__main__':
     threads that currently aren't able to automatically stop in the virtual machines
 
   Note: The reason the program always stalls at the end is because there are sockets
-    that we don't close, we have to do something like what's on line 190/191 at some point
-    then it won't stall
+    that we don't close, we have to do something like what's on line 196/197 at some point
+    then it won't stall. It's the same problem as in the original version
   
-  Note: logging got a little messed up, seems like it's logging to only one file for some reason
+  Note: im gonna go to bed but i realized you need to take the parenthesis out of lines
+    178-180, i think this is why all the process ids are the same. but then it breaks.
+    I believe we can move the class back to its own file, the problem is starting a
+    process when the target is a method of an object — it seems like multiprocessing
+    messes up at that point
   """
 
   hostname = '0.0.0.0'
