@@ -5,21 +5,25 @@ import time
 import os
 
 class MultiVirtualMachine():
+  def __init__(self, hostname, port):
+    self.listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    self.listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) # fixes almost all socket errors when killing process
+    self.hostname = hostname
+    self.port = port
+    self.listener.bind((self.hostname, self.port))
 
-  # needed to move out of initialization in order to ensure that this occurs in
+  # needed to move out of initialization in order to ensure that this all occurs in
   # child processes as opposed to all within the main process
-  def run_process(self, hostname, port, external_ports, logger, second_length):
+  def run_process(self, external_ports, logger, second_length):
+
     # set seed
-    random.seed(time.time() + port)
+    random.seed(time.time() + self.port)
     # configure logger for this particular machine, done in main.py
     self.logger = logger
 
     self.second_length = second_length # allows us to define shorter seconds so we don't have to always wait 60
-    self.port = port
-    self.hostname = hostname
-    self.listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    self.listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    self.listener.bind((self.hostname, self.port))
+    self.port = self.port
+    self.hostname = self.hostname
 
     # generate clock time for this particular machine
     self.clock_rate = random.randint(1, 6)
@@ -39,16 +43,11 @@ class MultiVirtualMachine():
     self.receive_thread = threading.Thread(target=self.receive)
     self.receive_thread.start()
     
-    print('Machine ' + str(port) + " has process id " + str(os.getpid()) + " and its internal clock rate is " + str(self.clock_rate))
+    print('Machine ' + str(self.port) + " has process id " + str(os.getpid()) + " and its internal clock rate is " + str(self.clock_rate))
     
     self.run_clock()
 
-    # this causes the program to terminate instead of stalling infinitely, also causes bugs
-    # I believe the issue is that one machine terminates first, closes its socket, then others
-    # try to send a message to a closed socket which errors
-    #self.listener.close()
-
-    time.sleep(10)
+    time.sleep(5)
 
 
   # run the process
@@ -76,7 +75,7 @@ class MultiVirtualMachine():
       if not message:
         break
       self.message_queue.append(message)
-    print('Machine ' + str(self.port) + ' terminated')
+    #print('Machine ' + str(self.port) + ' terminated')
 
 
   # if there isn't a message in the queue, generate one of the following random actions
@@ -126,4 +125,4 @@ class MultiVirtualMachine():
     _ = client.recv(1024).decode('ascii')
     client.send(str(message).encode('ascii'))
 
-    #client.close() # close after we send
+    client.close() # close after we send

@@ -6,8 +6,6 @@ import os
 from multi_virtual_machine import MultiVirtualMachine
 
 """
-TODO: some of the processes don't print "process terminated" still
-
 TODO: I think we need to do this: https://www.geeksforgeeks.org/lamports-logical-clock/
   
 TODO: Add Unit Tests
@@ -46,15 +44,15 @@ if __name__ == '__main__':
 
   # define machines
   ports = [1111, 2222, 3333]
-  machine1 = MultiVirtualMachine()
-  machine2 = MultiVirtualMachine()
-  machine3 = MultiVirtualMachine()
+  machine1 = MultiVirtualMachine(hostname, ports[0])
+  machine2 = MultiVirtualMachine(hostname, ports[1])
+  machine3 = MultiVirtualMachine(hostname, ports[2])
 
   machines = [machine1, machine2, machine3]
 
-  p1 = Process(target=machine1.run_process, args=(hostname, ports[0], ports, logger1, second_length))
-  p2 = Process(target=machine2.run_process, args=(hostname, ports[1], ports, logger2, second_length))
-  p3 = Process(target=machine3.run_process, args=(hostname, ports[2], ports, logger3, second_length))
+  p1 = Process(target=machine1.run_process, args=(ports, logger1, second_length))
+  p2 = Process(target=machine2.run_process, args=(ports, logger2, second_length))
+  p3 = Process(target=machine3.run_process, args=(ports, logger3, second_length))
 
   # start processes on target
   p1.start()
@@ -67,9 +65,14 @@ if __name__ == '__main__':
     print(f'Global time: {j}')
     time.sleep(second_length)
   
-  time.sleep(2)
+  print('\nTerminating processes... \n')
+
+  time.sleep(1)
   p1.terminate()
   p2.terminate()
   p3.terminate()
 
-  print('\nAll processes terminated\n')
+  for machine in machines: # close sockets for next use of program
+    machine.listener.close()
+
+  print('All processes terminated\n')
