@@ -12,6 +12,8 @@ class MultiVirtualMachine():
     self.port = port
     self.listener.bind((self.hostname, self.port))
 
+    self.clock_times = []
+
   # needed to move out of initialization in order to ensure that this all occurs in
   # child processes as opposed to all within the main process
   def run_process(self, external_ports, logger, second_length):
@@ -32,19 +34,19 @@ class MultiVirtualMachine():
 
     # we assume that all virtual machines have the same ip address, and just vary on different listening ports
     self.external_ports = external_ports.copy()
-    # do not listen to self 
+    # do not listen to self
     self.external_ports.remove(self.port)
 
     # deque.append() to add to right
     # deque.popleft() to pop message from left
     self.message_queue = deque([])
-    
+
     # begin a receiving thread to separately take messages from other machines
     self.receive_thread = threading.Thread(target=self.receive)
     self.receive_thread.start()
-    
+
     print('Machine ' + str(self.port) + " has process id " + str(os.getpid()) + " and its internal clock rate is " + str(self.clock_rate))
-    
+
     self.run_clock()
 
     time.sleep(5)
@@ -60,6 +62,7 @@ class MultiVirtualMachine():
           self.generate_action()
         time.sleep(self.second_length / self.clock_rate)
         self.local_logical_clock_time += 1
+        self.clock_times.append(self.local_logical_clock_times)
       self.global_time += 1
 
 
