@@ -6,8 +6,7 @@ import os
 from multi_virtual_machine import MultiVirtualMachine
 
 """
-TODO: the program has a ton of errors at the end but does terminate. This is because we now
-  close the sockets in run_process in each of the virtual machines
+TODO: some of the processes don't print "process terminated" still
 
 TODO: I think we need to do this: https://www.geeksforgeeks.org/lamports-logical-clock/
   
@@ -51,6 +50,8 @@ if __name__ == '__main__':
   machine2 = MultiVirtualMachine()
   machine3 = MultiVirtualMachine()
 
+  machines = [machine1, machine2, machine3]
+
   p1 = Process(target=machine1.run_process, args=(hostname, ports[0], ports, logger1, second_length))
   p2 = Process(target=machine2.run_process, args=(hostname, ports[1], ports, logger2, second_length))
   p3 = Process(target=machine3.run_process, args=(hostname, ports[2], ports, logger3, second_length))
@@ -65,10 +66,10 @@ if __name__ == '__main__':
   for j in range(1, 61): # print global time
     print(f'Global time: {j}')
     time.sleep(second_length)
-
-  # block here until all processes finished
-  p1.join()
-  p2.join()
-  p3.join()
+  
+  time.sleep(2)
+  p1.terminate()
+  p2.terminate()
+  p3.terminate()
 
   print('\nAll processes terminated\n')

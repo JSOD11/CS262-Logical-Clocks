@@ -18,6 +18,7 @@ class MultiVirtualMachine():
     self.port = port
     self.hostname = hostname
     self.listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    self.listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     self.listener.bind((self.hostname, self.port))
 
     # generate clock time for this particular machine
@@ -45,7 +46,9 @@ class MultiVirtualMachine():
     # this causes the program to terminate instead of stalling infinitely, also causes bugs
     # I believe the issue is that one machine terminates first, closes its socket, then others
     # try to send a message to a closed socket which errors
-    self.listener.close()
+    #self.listener.close()
+
+    time.sleep(10)
 
 
   # run the process
@@ -123,4 +126,4 @@ class MultiVirtualMachine():
     _ = client.recv(1024).decode('ascii')
     client.send(str(message).encode('ascii'))
 
-    client.close() # close after we send
+    #client.close() # close after we send
