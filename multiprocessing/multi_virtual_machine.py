@@ -74,6 +74,9 @@ class MultiVirtualMachine():
       message = client.recv(1024).decode('ascii')
       if not message:
         break
+
+      self.local_logical_clock_time = max(self.local_logical_clock_time, int(message)) # logical clock update
+
       self.message_queue.append(message)
     #print('Machine ' + str(self.port) + ' terminated')
 
