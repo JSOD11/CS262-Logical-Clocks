@@ -37,9 +37,7 @@ logger3 = setup_logger('third_logger', '3333.log')
 if __name__ == '__main__':
 
   second_length = 0.01 # allows us to have shorter seconds so we don't have to wait a whole minute
-  
   set_start_method('fork') # having the method be 'spawn' instead causes program to crash because it tries to pickle object
-
   hostname = '0.0.0.0'
 
   # define machines
@@ -48,16 +46,14 @@ if __name__ == '__main__':
   machine2 = MultiVirtualMachine(hostname, ports[1])
   machine3 = MultiVirtualMachine(hostname, ports[2])
 
-  machines = [machine1, machine2, machine3]
-
   p1 = Process(target=machine1.run_process, args=(ports, logger1, second_length))
   p2 = Process(target=machine2.run_process, args=(ports, logger2, second_length))
   p3 = Process(target=machine3.run_process, args=(ports, logger3, second_length))
 
-  # start processes on target
-  p1.start()
-  p2.start()
-  p3.start()
+  machines, processes = [machine1, machine2, machine3], [p1, p2, p3]
+
+  for p in processes: # start processes on target
+    p.start()
 
   print('\nAll processes started\n')
 
@@ -67,10 +63,9 @@ if __name__ == '__main__':
   
   print('\nTerminating processes... \n')
 
-  time.sleep(1)
-  p1.terminate()
-  p2.terminate()
-  p3.terminate()
+  time.sleep(0.5)
+  for p in processes: # terminate all processes
+    p.terminate()
 
   for machine in machines: # close sockets for next use of program
     machine.listener.close()
