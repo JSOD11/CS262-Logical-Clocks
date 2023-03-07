@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
   second_length = 0.01 # allows us to have shorter seconds so we don't have to wait a whole minute
   
-  set_start_method('fork') # having the method be 'spawn' instead causes program to crash
+  set_start_method('fork') # having the method be 'spawn' instead causes program to crash because it tries to pickle object
 
   hostname = '0.0.0.0'
 
@@ -55,7 +55,7 @@ if __name__ == '__main__':
   p2 = Process(target=machine2.run_process, args=(hostname, ports[1], ports, logger2, second_length))
   p3 = Process(target=machine3.run_process, args=(hostname, ports[2], ports, logger3, second_length))
 
-  # start processes
+  # start processes on target
   p1.start()
   p2.start()
   p3.start()
