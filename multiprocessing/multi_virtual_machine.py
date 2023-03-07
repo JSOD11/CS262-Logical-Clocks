@@ -5,8 +5,10 @@ import time
 import os
 
 class MultiVirtualMachine():
-  def __init__(self, hostname, port, external_ports, logger, second_length):
 
+  # needed to move out of initialization in order to ensure that this occurs in
+  # child processes as opposed to all within the main process
+  def run_process(self, hostname, port, external_ports, logger, second_length):
     # set seed
     random.seed(time.time() + port)
     # configure logger for this particular machine, done in main.py
@@ -20,7 +22,6 @@ class MultiVirtualMachine():
 
     # generate clock time for this particular machine
     self.clock_rate = random.randint(1, 6)
-    print('Machine ' + str(port) + " has process id " + str(os.getpid()) + " and its internal clock rate is " + str(self.clock_rate))
     self.local_logical_clock_time = 1
     self.global_time = 1
 
@@ -36,12 +37,18 @@ class MultiVirtualMachine():
     # begin a receiving thread to separately take messages from other machines
     self.receive_thread = threading.Thread(target=self.receive)
     self.receive_thread.start()
+    
+    print('Machine ' + str(port) + " has process id " + str(os.getpid()) + " and its internal clock rate is " + str(self.clock_rate))
+    
+    self.run_clock()
+
+    self.listener.close() # this causes the program to terminate instead of stalling infinitely, also causes bugs currently
 
 
   # run the process
-  def run(self):
+  def run_clock(self):
     for _ in range(60): # main loop runs 60 times, each is self.second_length seconds long
-      for i in range(self.clock_rate): # loop will run self.clock_rate times per self.second_length seconds
+      for _ in range(self.clock_rate): # loop will run self.clock_rate times per self.second_length seconds
         if self.message_queue:
           self.log_event(self.message_queue.popleft())
         else:

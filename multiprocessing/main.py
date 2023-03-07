@@ -6,13 +6,8 @@ import os
 from multi_virtual_machine import MultiVirtualMachine
 
 """
-TODO: the logs seem to be right, but when I print out the process ids they are the same so it seems 
-  like we still may not actually be multiprocessing. Need to figure that out
-
-TODO: as of right now, the program must be manually terminated. The reason for this is that
-  there are sockets that we tell to listen with self.listener.listen() in the virtual machine
-  but do not close with socket.close(), meaning that those threads just keep listening forever. 
-  We need to figure out when to close the sockets at the end, I keep getting bugs when I try
+TODO: the program has a ton of errors at the end but does terminate. This is because we now
+  close the sockets in run_process in each of the virtual machines
 
 TODO: I think we need to do this: https://www.geeksforgeeks.org/lamports-logical-clock/
   
@@ -46,35 +41,34 @@ if __name__ == '__main__':
 
   second_length = 0.01 # allows us to have shorter seconds so we don't have to wait a whole minute
   
-  set_start_method('fork') # fixes multiprocessing pickling error, but may be causing them to all be same process
+  set_start_method('fork') # having the method be 'spawn' instead causes program to crash
 
   hostname = '0.0.0.0'
 
-  # define machines.  ports is redefined twice because for some reason the machine objects are mutating the 'ports' list from this file
+  # define machines
   ports = [1111, 2222, 3333]
-  machine1 = MultiVirtualMachine(hostname, ports[0], ports, logger1, second_length)
-  machine2 = MultiVirtualMachine(hostname, ports[1], ports, logger2, second_length)
-  machine3 = MultiVirtualMachine(hostname, ports[2], ports, logger3, second_length)
+  machine1 = MultiVirtualMachine()
+  machine2 = MultiVirtualMachine()
+  machine3 = MultiVirtualMachine()
 
-  p1 = Process(target=machine1.run)
-  p2 = Process(target=machine2.run)
-  p3 = Process(target=machine3.run)
+  p1 = Process(target=machine1.run_process, args=(hostname, ports[0], ports, logger1, second_length))
+  p2 = Process(target=machine2.run_process, args=(hostname, ports[1], ports, logger2, second_length))
+  p3 = Process(target=machine3.run_process, args=(hostname, ports[2], ports, logger3, second_length))
 
+  # start processes
   p1.start()
   p2.start()
   p3.start()
 
   print('\nAll processes started\n')
 
-  for j in range(1, 61):
+  for j in range(1, 61): # print global time
     print(f'Global time: {j}')
     time.sleep(second_length)
 
+  # block here until all processes finished
   p1.join()
   p2.join()
   p3.join()
-
-# for machine in machines: # we need something like this, but this causes errors
-#   machine.listener.close()
 
   print('\nAll processes terminated\n')
