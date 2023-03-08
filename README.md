@@ -27,3 +27,13 @@ python3 main.py
 This will run three processes, each with a randomly generated logical clock that will "tick" one to six times per second for sixty seconds (these parameters can all be tweaked in `main.py` if one is interested. Importantly, we can set `second_length` to be very short so we don't actually have to wait sixty seconds for this to complete). Each process is running separately, as one can verify by viewing that the process IDs are all different. The processes communicate through sockets following the protocol detailed in `assignment.md`.
 
 View `plots` for a plot of the three clocks, `logs` for detailed logging information, or `data` for txt files with the logical clock data.
+
+# Conclusions
+
+It seems that the size of the jumps for logical clocks will follow a general growth rate based on the environment they are in (the clock rate of the other two logical clocks, and the probability of an event being an internal). The logical clock values trend in a straight line with a greater slope being associated with a smaller clock rate. The drift of a clock will be relatively linear over a longer period of time, and it seems that decreasing the probability of internal events decreases noise along this line
+
+Machines with slower logical clocks seem to face two main issues: they lag behind their faster peers, and their queues grow very quickly.
+
+In almost every plot charting the logical clock values, we see that the highest final value is achieved by the faster clocks. Slower clocks are constantly updating their logical clock as they receive messages, leading to a higher slope, while faster clocks have a slope that is closer to 1. When all the logical clocks have a similar rate, we see that there is less disparity between the slopes and final times achieved. Furthermore, decreasing the probability of internal events means that the network of clocks will be interconnected more closely, so lines will become sharper and have less variance.
+
+The queue length charts make the advantage of the faster machines clear. Machines with slower clocks are consistently overpowered by machines with faster clocks, while cases in which all the machines are running at a similar speed will result in smaller queue lengths. Cases in which two clocks have high clock rates and one clock has a low rate (such as 1, 6, 6) cause the slow machine to be pushed to very high queue lengths.
