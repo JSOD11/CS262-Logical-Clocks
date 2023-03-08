@@ -23,6 +23,6 @@ Now, run
 python3 main.py
 ```
 
-This will run three processes, each with a randomly generated logical clock that will "tick" one to six times per second for sixty seconds (these parameters can all be tweaked in `main.py` if one is interested. Importantly, we can set `second_length` to be very short so we don't actually have to wait sixty seconds for this to complete).
+This will run three processes, each with a randomly generated logical clock that will "tick" one to six times per second for sixty seconds (these parameters can all be tweaked in `main.py` if one is interested. Importantly, we can set `second_length` to be very short so we don't actually have to wait sixty seconds for this to complete). Each process is running separately, as one can verify by viewing that the process IDs are all different. The processes communicate through sockets following the protocol detailed in `assignment.md`.
 
 View `plots` for a plot of the three clocks, `logs` for detailed logging information, or `data` for txt files with the logical clock data.
