@@ -1,3 +1,9 @@
+Examine the logs, and discuss (in the lab book) the size of the jumps in the values for the logical clocks, drift in the values of the local logical clocks in the different machines (you can get a god’s eye view because of the system time), and the impact different timings on such things as gaps in the logical clock values and length of the message queue. Observations and reflections about the model and the results of running the model are more than welcome.
+
+Observations:
+ - It seems that the size of the jumps for logical clocks will follow a general growth rate based on the environment they are in (the clock rate of the other two logical clocks, and the probability of an event being an internal)
+ - The logical clock values trend in a straight line with a greater slope being associated with a smaller clock rate. The drift of a clock will be relatively linear over a longer period of time, and it seems that decreasing the probability of internal events decreases noise along this line
+
 Tuesday 3.7
 - Made one minor change to ensure that the local logical clocks will be set equal to the max of their current time and a message they could be receiving
 - Create unit tests for all the functions to ensure everything is working correctly
@@ -15,11 +21,10 @@ Tuesday 3.7
  - manually set clock rates and make sure that slower machine's message queue increases
 - Added plotting functionality
  - ability to overlay plots, see the differences in logical clock tick values
-- OBSERVATIONS:
  - added functionality to pick lower and upper bounds for the rates
-  - when there is less variance in the rates that can be generated, the lines are much closer to each other
+ - when there is less variance in the rates that can be generated, the lines are much closer to each other
  - added functionality to decrease the rate that an event is internal
-  - it seems like this makes the lines flatter and less “jumpy,” maybe this could be because there is more consistent communication between all the machines so the rate at which the logical clock grows is more consistent
+ - it seems like this makes the lines flatter and less “jumpy,” maybe this could be because there is more consistent communication between all the machines so the rate at which the logical clock grows is more consistent
 
 
 Monday 3.6
