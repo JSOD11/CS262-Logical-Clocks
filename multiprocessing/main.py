@@ -69,5 +69,7 @@ if __name__ == '__main__':
 
   for machine in machines: # close sockets for next use of program
     machine.listener.close()
+    print(machine.clock_times)
+    #machine.generate_plots()
 
   print('All processes terminated\n')

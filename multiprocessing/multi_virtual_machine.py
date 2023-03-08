@@ -3,6 +3,7 @@ from collections import deque
 import random
 import time
 import os
+import matplotlib.pyplot as plt
 
 class MultiVirtualMachine():
   def __init__(self, hostname, port):
@@ -12,6 +13,8 @@ class MultiVirtualMachine():
     self.port = port
     self.listener.bind((self.hostname, self.port))
 
+    # generate clock time for this particular machine
+    self.clock_rate = random.randint(1, 6)
     self.clock_times = []
 
   # needed to move out of initialization in order to ensure that this all occurs in
@@ -27,8 +30,6 @@ class MultiVirtualMachine():
     self.port = self.port
     self.hostname = self.hostname
 
-    # generate clock time for this particular machine
-    self.clock_rate = random.randint(1, 6)
     self.local_logical_clock_time = 1
     self.global_time = 1
 
@@ -62,7 +63,7 @@ class MultiVirtualMachine():
           self.generate_action()
         time.sleep(self.second_length / self.clock_rate)
         self.local_logical_clock_time += 1
-        self.clock_times.append(self.local_logical_clock_times)
+        self.clock_times.append(self.local_logical_clock_time)
       self.global_time += 1
 
 
@@ -132,3 +133,10 @@ class MultiVirtualMachine():
     client.send(str(message).encode('ascii'))
 
     client.close() # close after we send
+
+  def generate_plots(self):
+    plt.plot(self.clock_times)
+    plt.title(f'Logical Clock Hist, Clock Rate: {self.clock_rate}')
+    plt.xlabel('ABC')
+    plt.ylabel('DEF')
+    plt.savefig(f'plots/{self.port}.png')
