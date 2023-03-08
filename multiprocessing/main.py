@@ -40,7 +40,7 @@ logger3 = setup_logger('third_logger', 'logs/7979.log')
 def load_data(files): # function to load data from txt files into 3 arrays
   data = []
   clock_rates = []
-  for p in files:
+  for p in files: # loop through each of 3 files
     test = []
     f = open(p, "r")
     for j, line in enumerate(f):
@@ -70,30 +70,32 @@ def generate_overlay_plot(clock_rates, data, title, ylabel, filetype): # generat
 
 if __name__ == '__main__':
 
-  second_length = 0.01 # allows us to have shorter seconds so we don't have to wait a whole minute
+  second_length = 1 # allows us to have shorter seconds so we don't have to wait a whole minute
+
   set_start_method('fork') # having the method be 'spawn' instead causes program to crash because it tries to pickle object
   hostname = '0.0.0.0'
 
   lower_bound, upper_bound = 1, 6 # set the range from which clock rates will be chosen
   decrease_internal_prob = True
 
-  # define machines
+  # define machines and initialize sockets in constructor
   machine1 = MultiVirtualMachine(hostname, ports[0], lower_bound, upper_bound, decrease_internal_prob)
   machine2 = MultiVirtualMachine(hostname, ports[1], lower_bound, upper_bound, decrease_internal_prob)
   machine3 = MultiVirtualMachine(hostname, ports[2], lower_bound, upper_bound, decrease_internal_prob)
 
+  # deine processes, target is run_process method of each machine
   p1 = Process(target=machine1.run_process, args=(ports, logger1, second_length))
   p2 = Process(target=machine2.run_process, args=(ports, logger2, second_length))
   p3 = Process(target=machine3.run_process, args=(ports, logger3, second_length))
 
   machines, processes = [machine1, machine2, machine3], [p1, p2, p3]
 
-  for p in processes: # start processes on target
+  for p in processes: # start processes on target (run method of machine)
     p.start()
 
   print('\nAll processes started\n')
 
-  for j in range(1, 61): # print global time
+  for j in range(1, 61): # print global time from 1 to 60
     print(f'Global time: {j}')
     time.sleep(second_length)
   
@@ -116,4 +118,4 @@ if __name__ == '__main__':
   # generate a plot from queue length data
   queue_files = ["data/" + str(ports[0]) + "-queue.txt", "data/" + str(ports[1]) + "-queue.txt", "data/" + str(ports[2]) + "-queue.txt"]
   clock_rates, data = load_data(queue_files)
-  generate_overlay_plot(clock_rates, data, title='Queue lengths', ylabel='Queue length', filetype='queue')
+  generate_overlay_plot(clock_rates, data, title='Queue lengths for Logical Clock Rates', ylabel='Queue length', filetype='queue')
