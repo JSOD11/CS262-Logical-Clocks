@@ -1,5 +1,5 @@
 # CS262-Logical-Clocks
-Logical clocks implementation using sockets and multiprocessing for CS 262, Harvard's graduate course in distributed systems.
+Logical clocks implementation across multiple processes using sockets and multiprocessing for CS 262, Harvard's graduate course in distributed systems.
 
 <img width="1460" alt="Logical Clock Plots" src="https://user-images.githubusercontent.com/55005116/223614949-c99ad3b3-6622-48b6-af8f-2dff85c53db0.png">
 
