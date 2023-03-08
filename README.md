@@ -2,6 +2,7 @@
 Logical clocks implementation across multiple processes using sockets and multiprocessing for CS 262, Harvard's graduate course in distributed systems.
 
 <img width="1460" alt="Logical Clock Plots" src="https://user-images.githubusercontent.com/55005116/223614949-c99ad3b3-6622-48b6-af8f-2dff85c53db0.png">
+<img width="2251" alt="Queue length plots" src="https://user-images.githubusercontent.com/55005116/223622334-c9632d76-9db5-4940-a821-76eb1d631a8b.png">
 
 # How To Use
 
