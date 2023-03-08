@@ -63,6 +63,9 @@ class MultiVirtualMachine():
         time.sleep(self.second_length / self.clock_rate)
         self.local_logical_clock_time += 1
         self.clock_times.append(self.local_logical_clock_time)
+        f = open(str(self.port) + ".txt", 'a')
+        f.write(str(self.local_logical_clock_time) + '\n')
+        f.close()
       self.global_time += 1
 
 
