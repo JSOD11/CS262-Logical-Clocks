@@ -55,19 +55,9 @@ def load_data(ports): # function to load data from txt files into 3 arrays
   return clock_rates, testing
 
 
-def generate_plots(ports, clock_rates, testing): # generate plots for each logical clock
-  for port, rate, test in zip(ports, clock_rates, testing):
-    plt.figure()
-    plt.plot(test)
-    plt.title(f'Logical Clock Hist, Clock Rate: {rate}')
-    plt.xlabel('Clock Tick')
-    plt.ylabel('Logical Clock Value')
-    plt.savefig(f'plots/{port}.png')
-
-
-def generate_overlay_plot(clock_rates, testing): # generate plots for each logical clock
+def generate_overlay_plot(clock_rates, testing): # generate overlay plots for each logical clock
   plt.figure()
-  plt.title(f'Logical Clock Hist, Clock Rates: {clock_rates[0]}, {clock_rates[1]}, {clock_rates[2]}')
+  plt.title(f'Logical Clock Rates: {clock_rates[0]}, {clock_rates[1]}, {clock_rates[2]}')
   plt.xlabel('Clock Tick')
   plt.ylabel('Logical Clock Value')
 
@@ -75,7 +65,7 @@ def generate_overlay_plot(clock_rates, testing): # generate plots for each logic
     plt.plot(test, label=f'Clock rate: {rate}')
 
   plt.legend()
-  
+  clock_rates.sort()
   plt.savefig(f'plots/{clock_rates[0]}{clock_rates[1]}{clock_rates[2]}.png')
 
 
@@ -85,10 +75,13 @@ if __name__ == '__main__':
   set_start_method('fork') # having the method be 'spawn' instead causes program to crash because it tries to pickle object
   hostname = '0.0.0.0'
 
+  lower_bound, upper_bound = 1, 6 # set the range from which clock rates will be chosen
+  decrease_internal_prob = True
+
   # define machines
-  machine1 = MultiVirtualMachine(hostname, ports[0])
-  machine2 = MultiVirtualMachine(hostname, ports[1])
-  machine3 = MultiVirtualMachine(hostname, ports[2])
+  machine1 = MultiVirtualMachine(hostname, ports[0], lower_bound, upper_bound, decrease_internal_prob)
+  machine2 = MultiVirtualMachine(hostname, ports[1], lower_bound, upper_bound, decrease_internal_prob)
+  machine3 = MultiVirtualMachine(hostname, ports[2], lower_bound, upper_bound, decrease_internal_prob)
 
   p1 = Process(target=machine1.run_process, args=(ports, logger1, second_length))
   p2 = Process(target=machine2.run_process, args=(ports, logger2, second_length))
@@ -117,5 +110,4 @@ if __name__ == '__main__':
   print('All processes terminated\n')
 
   clock_rates, testing = load_data(ports)
-  #generate_plots(ports, clock_rates, testing)
   generate_overlay_plot(clock_rates, testing)

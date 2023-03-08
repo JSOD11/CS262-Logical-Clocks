@@ -5,15 +5,17 @@ import time
 import os
 
 class MultiVirtualMachine():
-  def __init__(self, hostname, port):
+  def __init__(self, hostname, port, lower_bound = 1, upper_bound = 6, decrease_internal_prob = False):
     self.listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     self.listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) # fixes almost all socket errors when killing process
     self.hostname = hostname
     self.port = port
     self.listener.bind((self.hostname, self.port))
 
+    self.decrease_internal_prob = decrease_internal_prob # used for decreasing probability an event is internal from 70% to 40%
+
     # generate clock time for this particular machine
-    self.clock_rate = random.randint(1, 6)
+    self.clock_rate = random.randint(lower_bound, upper_bound)
     self.clock_times = []
 
     # NOTE: first line of the text files is the clock rate
@@ -54,7 +56,7 @@ class MultiVirtualMachine():
 
     self.run_clock()
 
-    time.sleep(5)
+    time.sleep(5) # we'll terminate the processes in main.py before they reach the end of this 5 seconds
 
 
   # run the process
@@ -65,20 +67,20 @@ class MultiVirtualMachine():
           self.log_event(self.message_queue.popleft())
         else:
           self.generate_action()
-        time.sleep(self.second_length / self.clock_rate)
+        time.sleep(self.second_length / self.clock_rate) # causes logical clock to run self.clock_rate times per second
         self.local_logical_clock_time += 1
-        self.clock_times.append(self.local_logical_clock_time)
-        f = open("data/" + str(self.port) + ".txt", 'a')
+        self.clock_times.append(self.local_logical_clock_time) # used for hist
+
+        f = open("data/" + str(self.port) + ".txt", 'a') # write to txt file
         f.write(str(self.local_logical_clock_time) + '\n')
         f.close()
+
       self.global_time += 1
 
 
   def receive(self):
     self.listener.listen()
     # if global time is past 60, we no longer have to listen
-    # this is currently causing a main.py termination issue because some machines will continue trying to
-    # accept new clients even after global time has already reached 60
     while self.global_time < 61:
       client, address = self.listener.accept()
       client.send(('Ready to receive!').encode('ascii'))
@@ -89,24 +91,23 @@ class MultiVirtualMachine():
       self.local_logical_clock_time = max(self.local_logical_clock_time, int(message)) # logical clock update
 
       self.message_queue.append(message)
-    #print('Machine ' + str(self.port) + ' terminated')
 
 
   # if there isn't a message in the queue, generate one of the following random actions
   def generate_action(self):
     action = random.randint(1, 10)
     message = self.local_logical_clock_time
-    if action == 1:
+    if action == 1 or (self.decrease_internal_prob and action == 4):
       # send to one other machine, log
       send_thread = threading.Thread(target=self.send_message, args=(message, self.external_ports[0],))
       send_thread.start()
       self.log_event(message, [self.external_ports[0]])
-    elif action == 2:
+    elif action == 2 or (self.decrease_internal_prob and action == 5):
       # send to the other machine, log
       send_thread = threading.Thread(target=self.send_message, args=(message, self.external_ports[1],))
       send_thread.start()
       self.log_event(message, [self.external_ports[1]])
-    elif action == 3:
+    elif action == 3 or (self.decrease_internal_prob and action == 6):
       # send to both machinges, log
       send_thread_1 = threading.Thread(target=self.send_message, args=(message, self.external_ports[0],))
       send_thread_1.start()
