@@ -16,6 +16,11 @@ class MultiVirtualMachine():
     self.clock_rate = random.randint(1, 6)
     self.clock_times = []
 
+    # NOTE: first line of the text files is the clock rate
+    f = open("data/" + str(self.port) + ".txt", 'a')
+    f.write(str(self.clock_rate) + '\n')
+    f.close()
+
   # needed to move out of initialization in order to ensure that this all occurs in
   # child processes as opposed to all within the main process
   def run_process(self, external_ports, logger, second_length):
@@ -63,7 +68,7 @@ class MultiVirtualMachine():
         time.sleep(self.second_length / self.clock_rate)
         self.local_logical_clock_time += 1
         self.clock_times.append(self.local_logical_clock_time)
-        f = open(str(self.port) + ".txt", 'a')
+        f = open("data/" + str(self.port) + ".txt", 'a')
         f.write(str(self.local_logical_clock_time) + '\n')
         f.close()
       self.global_time += 1
@@ -135,10 +140,3 @@ class MultiVirtualMachine():
     client.send(str(message).encode('ascii'))
 
     client.close() # close after we send
-
-  def generate_plots(self):
-    plt.plot(self.clock_times)
-    plt.title(f'Logical Clock Hist, Clock Rate: {self.clock_rate}')
-    plt.xlabel('ABC')
-    plt.ylabel('DEF')
-    plt.savefig(f'plots/{self.port}.png')

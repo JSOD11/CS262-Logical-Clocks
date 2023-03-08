@@ -2,27 +2,29 @@ from multiprocessing import Process, set_start_method
 import time
 import logging
 import os
+import matplotlib.pyplot as plt
 
 from multi_virtual_machine import MultiVirtualMachine
 
-"""
-TODO: I think we need to do this: https://www.geeksforgeeks.org/lamports-logical-clock/
-  
-TODO: Add Unit Tests
-"""
+plt.style.use('ggplot')
 
 formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
 
-# delete previous logging files if they exist
-if os.path.isfile('7977.log'):
-  os.remove('7977.log')
-if os.path.isfile('7978.log'):
-  os.remove('7978.log')
-if os.path.isfile('7979.log'):
-  os.remove('7979.log')
+# define ports
+ports = [7977, 7978, 7979]
 
-# found on stackoverflow, had to get around because other wise all machines were logging to the same file
-def setup_logger(name, log_file, level=logging.INFO):
+for port in ports:
+  if os.path.isfile(f'logs/{port}.log'): # clear log files
+    os.remove(f'logs/{port}.log')
+
+  if os.path.isfile(f'data/{port}.txt'): # clear saved data
+    os.remove(f'data/{port}.txt')
+  
+  if os.path.isfile(f'plots/{port}.txt'): # clear plots
+    os.remove(f'data/{port}.txt')
+
+
+def setup_logger(name, log_file, level=logging.INFO): # logging function
   handler = logging.FileHandler(log_file)
   handler.setFormatter(formatter)
   logger = logging.getLogger(name)
@@ -30,9 +32,52 @@ def setup_logger(name, log_file, level=logging.INFO):
   logger.addHandler(handler)
   return logger
 
-logger1 = setup_logger('first_logger', '7977.log')
-logger2 = setup_logger('second_logger', '7978.log')
-logger3 = setup_logger('third_logger', '7979.log')
+logger1 = setup_logger('first_logger', 'logs/7977.log')
+logger2 = setup_logger('second_logger', 'logs/7978.log')
+logger3 = setup_logger('third_logger', 'logs/7979.log')
+
+
+def load_data(ports): # function to load data from txt files into 3 arrays
+  pids = ["data/" + str(ports[0]) + ".txt", "data/" + str(ports[1]) + ".txt", "data/" + str(ports[2]) + ".txt"]
+  testing = []
+  clock_rates = []
+  for p in pids:
+    test = []
+    f = open(p, "r")
+    for j, line in enumerate(f):
+      if j == 0: # the first line of each txt file is the clock rate for that file
+        clock_rates.append(int(line.strip()))
+      else:
+        test.append(int(line.strip()))
+    testing.append(test)
+    f.close()
+  
+  return clock_rates, testing
+
+
+def generate_plots(ports, clock_rates, testing): # generate plots for each logical clock
+  for port, rate, test in zip(ports, clock_rates, testing):
+    plt.figure()
+    plt.plot(test)
+    plt.title(f'Logical Clock Hist, Clock Rate: {rate}')
+    plt.xlabel('Clock Tick')
+    plt.ylabel('Logical Clock Value')
+    plt.savefig(f'plots/{port}.png')
+
+
+def generate_overlay_plot(clock_rates, testing): # generate plots for each logical clock
+  plt.figure()
+  plt.title(f'Logical Clock Hist, Clock Rates: {clock_rates[0]}, {clock_rates[1]}, {clock_rates[2]}')
+  plt.xlabel('Clock Tick')
+  plt.ylabel('Logical Clock Value')
+
+  for rate, test in zip(clock_rates, testing):
+    plt.plot(test, label=f'Clock rate: {rate}')
+
+  plt.legend()
+  
+  plt.savefig(f'plots/{clock_rates[0]}{clock_rates[1]}{clock_rates[2]}.png')
+
 
 if __name__ == '__main__':
 
@@ -41,7 +86,6 @@ if __name__ == '__main__':
   hostname = '0.0.0.0'
 
   # define machines
-  ports = [7977, 7978, 7979]
   machine1 = MultiVirtualMachine(hostname, ports[0])
   machine2 = MultiVirtualMachine(hostname, ports[1])
   machine3 = MultiVirtualMachine(hostname, ports[2])
@@ -69,7 +113,9 @@ if __name__ == '__main__':
 
   for machine in machines: # close sockets for next use of program
     machine.listener.close()
-    print(machine.clock_times)
-    #machine.generate_plots()
 
   print('All processes terminated\n')
+
+  clock_rates, testing = load_data(ports)
+  #generate_plots(ports, clock_rates, testing)
+  generate_overlay_plot(clock_rates, testing)

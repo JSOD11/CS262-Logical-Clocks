@@ -1,0 +1,120 @@
+2023-03-07 21:54:09,812 INFO INTERNAL EVENT, global time: 1, local logical clock time:    1
+2023-03-07 21:54:09,818 INFO INTERNAL EVENT, global time: 1, local logical clock time:    2
+2023-03-07 21:54:09,824 INFO RECEIVED MESSAGE:            4, global time: 2, local logical clock time: 5, message queue length: 0
+2023-03-07 21:54:09,830 INFO INTERNAL EVENT, global time: 2, local logical clock time:    6
+2023-03-07 21:54:09,836 INFO INTERNAL EVENT, global time: 3, local logical clock time:    7
+2023-03-07 21:54:09,842 INFO SENT MESSAGE:                8, TO: 7979, global time:       3, local logical clock time: 8
+2023-03-07 21:54:09,848 INFO RECEIVED MESSAGE:            13, global time: 4, local logical clock time: 14, message queue length: 0
+2023-03-07 21:54:09,854 INFO RECEIVED MESSAGE:            18, global time: 4, local logical clock time: 19, message queue length: 0
+2023-03-07 21:54:09,860 INFO RECEIVED MESSAGE:            17, global time: 5, local logical clock time: 20, message queue length: 0
+2023-03-07 21:54:09,866 INFO RECEIVED MESSAGE:            23, global time: 5, local logical clock time: 24, message queue length: 0
+2023-03-07 21:54:09,871 INFO INTERNAL EVENT, global time: 6, local logical clock time:    25
+2023-03-07 21:54:09,877 INFO INTERNAL EVENT, global time: 6, local logical clock time:    26
+2023-03-07 21:54:09,883 INFO RECEIVED MESSAGE:            31, global time: 7, local logical clock time: 32, message queue length: 0
+2023-03-07 21:54:09,889 INFO INTERNAL EVENT, global time: 7, local logical clock time:    33
+2023-03-07 21:54:09,895 INFO RECEIVED MESSAGE:            36, global time: 8, local logical clock time: 39, message queue length: 1
+2023-03-07 21:54:09,901 INFO RECEIVED MESSAGE:            38, global time: 8, local logical clock time: 40, message queue length: 0
+2023-03-07 21:54:09,907 INFO INTERNAL EVENT, global time: 9, local logical clock time:    41
+2023-03-07 21:54:09,912 INFO INTERNAL EVENT, global time: 9, local logical clock time:    42
+2023-03-07 21:54:09,918 INFO INTERNAL EVENT, global time: 10, local logical clock time:    43
+2023-03-07 21:54:09,924 INFO RECEIVED MESSAGE:            47, global time: 10, local logical clock time: 48, message queue length: 0
+2023-03-07 21:54:09,930 INFO RECEIVED MESSAGE:            48, global time: 11, local logical clock time: 49, message queue length: 0
+2023-03-07 21:54:09,936 INFO INTERNAL EVENT, global time: 11, local logical clock time:    50
+2023-03-07 21:54:09,942 INFO RECEIVED MESSAGE:            57, global time: 12, local logical clock time: 58, message queue length: 1
+2023-03-07 21:54:09,948 INFO RECEIVED MESSAGE:            53, global time: 12, local logical clock time: 62, message queue length: 1
+2023-03-07 21:54:09,954 INFO RECEIVED MESSAGE:            61, global time: 13, local logical clock time: 63, message queue length: 1
+2023-03-07 21:54:09,960 INFO RECEIVED MESSAGE:            62, global time: 13, local logical clock time: 68, message queue length: 4
+2023-03-07 21:54:09,966 INFO RECEIVED MESSAGE:            63, global time: 14, local logical clock time: 70, message queue length: 4
+2023-03-07 21:54:09,972 INFO RECEIVED MESSAGE:            65, global time: 14, local logical clock time: 71, message queue length: 3
+2023-03-07 21:54:09,977 INFO RECEIVED MESSAGE:            66, global time: 15, local logical clock time: 76, message queue length: 4
+2023-03-07 21:54:09,983 INFO RECEIVED MESSAGE:            67, global time: 15, local logical clock time: 77, message queue length: 3
+2023-03-07 21:54:09,988 INFO RECEIVED MESSAGE:            69, global time: 16, local logical clock time: 81, message queue length: 3
+2023-03-07 21:54:09,994 INFO RECEIVED MESSAGE:            73, global time: 16, local logical clock time: 84, message queue length: 4
+2023-03-07 21:54:09,999 INFO RECEIVED MESSAGE:            75, global time: 17, local logical clock time: 85, message queue length: 3
+2023-03-07 21:54:10,005 INFO RECEIVED MESSAGE:            80, global time: 17, local logical clock time: 87, message queue length: 3
+2023-03-07 21:54:10,011 INFO RECEIVED MESSAGE:            82, global time: 18, local logical clock time: 92, message queue length: 4
+2023-03-07 21:54:10,017 INFO RECEIVED MESSAGE:            83, global time: 18, local logical clock time: 94, message queue length: 4
+2023-03-07 21:54:10,023 INFO RECEIVED MESSAGE:            86, global time: 19, local logical clock time: 95, message queue length: 3
+2023-03-07 21:54:10,029 INFO RECEIVED MESSAGE:            90, global time: 19, local logical clock time: 97, message queue length: 3
+2023-03-07 21:54:10,035 INFO RECEIVED MESSAGE:            91, global time: 20, local logical clock time: 100, message queue length: 3
+2023-03-07 21:54:10,040 INFO RECEIVED MESSAGE:            93, global time: 20, local logical clock time: 101, message queue length: 2
+2023-03-07 21:54:10,046 INFO RECEIVED MESSAGE:            96, global time: 21, local logical clock time: 107, message queue length: 2
+2023-03-07 21:54:10,052 INFO RECEIVED MESSAGE:            99, global time: 21, local logical clock time: 108, message queue length: 1
+2023-03-07 21:54:10,058 INFO RECEIVED MESSAGE:            106, global time: 22, local logical clock time: 109, message queue length: 0
+2023-03-07 21:54:10,064 INFO RECEIVED MESSAGE:            108, global time: 22, local logical clock time: 110, message queue length: 0
+2023-03-07 21:54:10,070 INFO INTERNAL EVENT, global time: 23, local logical clock time:    111
+2023-03-07 21:54:10,076 INFO SENT MESSAGE:                112, TO: 7979, global time:       23, local logical clock time: 112
+2023-03-07 21:54:10,082 INFO RECEIVED MESSAGE:            124, global time: 24, local logical clock time: 125, message queue length: 0
+2023-03-07 21:54:10,088 INFO RECEIVED MESSAGE:            126, global time: 24, local logical clock time: 127, message queue length: 0
+2023-03-07 21:54:10,093 INFO RECEIVED MESSAGE:            129, global time: 25, local logical clock time: 130, message queue length: 0
+2023-03-07 21:54:10,099 INFO INTERNAL EVENT, global time: 25, local logical clock time:    131
+2023-03-07 21:54:10,105 INFO SENT MESSAGE:                132, TO: 7979, global time:       26, local logical clock time: 132
+2023-03-07 21:54:10,110 INFO RECEIVED MESSAGE:            137, global time: 26, local logical clock time: 138, message queue length: 0
+2023-03-07 21:54:10,117 INFO SENT MESSAGE:                139, TO: 7978, 7979, global time:       27, local logical clock time: 139
+2023-03-07 21:54:10,122 INFO RECEIVED MESSAGE:            142, global time: 27, local logical clock time: 143, message queue length: 0
+2023-03-07 21:54:10,128 INFO RECEIVED MESSAGE:            144, global time: 28, local logical clock time: 147, message queue length: 1
+2023-03-07 21:54:10,134 INFO RECEIVED MESSAGE:            146, global time: 28, local logical clock time: 150, message queue length: 2
+2023-03-07 21:54:10,140 INFO RECEIVED MESSAGE:            145, global time: 29, local logical clock time: 151, message queue length: 2
+2023-03-07 21:54:10,146 INFO RECEIVED MESSAGE:            149, global time: 29, local logical clock time: 154, message queue length: 2
+2023-03-07 21:54:10,152 INFO RECEIVED MESSAGE:            150, global time: 30, local logical clock time: 156, message queue length: 2
+2023-03-07 21:54:10,158 INFO RECEIVED MESSAGE:            153, global time: 30, local logical clock time: 159, message queue length: 2
+2023-03-07 21:54:10,164 INFO RECEIVED MESSAGE:            155, global time: 31, local logical clock time: 163, message queue length: 2
+2023-03-07 21:54:10,170 INFO RECEIVED MESSAGE:            158, global time: 31, local logical clock time: 164, message queue length: 1
+2023-03-07 21:54:10,175 INFO RECEIVED MESSAGE:            162, global time: 32, local logical clock time: 168, message queue length: 1
+2023-03-07 21:54:10,181 INFO RECEIVED MESSAGE:            167, global time: 32, local logical clock time: 169, message queue length: 0
+2023-03-07 21:54:10,187 INFO RECEIVED MESSAGE:            171, global time: 33, local logical clock time: 172, message queue length: 0
+2023-03-07 21:54:10,193 INFO RECEIVED MESSAGE:            175, global time: 33, local logical clock time: 176, message queue length: 0
+2023-03-07 21:54:10,199 INFO INTERNAL EVENT, global time: 34, local logical clock time:    177
+2023-03-07 21:54:10,205 INFO RECEIVED MESSAGE:            180, global time: 34, local logical clock time: 181, message queue length: 0
+2023-03-07 21:54:10,211 INFO RECEIVED MESSAGE:            182, global time: 35, local logical clock time: 184, message queue length: 1
+2023-03-07 21:54:10,217 INFO RECEIVED MESSAGE:            183, global time: 35, local logical clock time: 187, message queue length: 2
+2023-03-07 21:54:10,223 INFO RECEIVED MESSAGE:            185, global time: 36, local logical clock time: 188, message queue length: 1
+2023-03-07 21:54:10,228 INFO RECEIVED MESSAGE:            186, global time: 36, local logical clock time: 192, message queue length: 1
+2023-03-07 21:54:10,234 INFO RECEIVED MESSAGE:            191, global time: 37, local logical clock time: 193, message queue length: 0
+2023-03-07 21:54:10,240 INFO RECEIVED MESSAGE:            196, global time: 37, local logical clock time: 197, message queue length: 0
+2023-03-07 21:54:10,246 INFO INTERNAL EVENT, global time: 38, local logical clock time:    198
+2023-03-07 21:54:10,252 INFO RECEIVED MESSAGE:            199, global time: 38, local logical clock time: 200, message queue length: 0
+2023-03-07 21:54:10,257 INFO RECEIVED MESSAGE:            203, global time: 39, local logical clock time: 204, message queue length: 0
+2023-03-07 21:54:10,263 INFO RECEIVED MESSAGE:            208, global time: 39, local logical clock time: 209, message queue length: 0
+2023-03-07 21:54:10,269 INFO SENT MESSAGE:                210, TO: 7978, 7979, global time:       40, local logical clock time: 210
+2023-03-07 21:54:10,275 INFO RECEIVED MESSAGE:            214, global time: 40, local logical clock time: 215, message queue length: 0
+2023-03-07 21:54:10,281 INFO RECEIVED MESSAGE:            214, global time: 41, local logical clock time: 216, message queue length: 0
+2023-03-07 21:54:10,287 INFO RECEIVED MESSAGE:            215, global time: 41, local logical clock time: 217, message queue length: 0
+2023-03-07 21:54:10,293 INFO RECEIVED MESSAGE:            217, global time: 42, local logical clock time: 218, message queue length: 0
+2023-03-07 21:54:10,299 INFO RECEIVED MESSAGE:            225, global time: 42, local logical clock time: 226, message queue length: 0
+2023-03-07 21:54:10,305 INFO INTERNAL EVENT, global time: 43, local logical clock time:    227
+2023-03-07 21:54:10,311 INFO SENT MESSAGE:                228, TO: 7978, global time:       43, local logical clock time: 228
+2023-03-07 21:54:10,317 INFO RECEIVED MESSAGE:            232, global time: 44, local logical clock time: 233, message queue length: 0
+2023-03-07 21:54:10,322 INFO INTERNAL EVENT, global time: 44, local logical clock time:    234
+2023-03-07 21:54:10,328 INFO SENT MESSAGE:                235, TO: 7979, global time:       45, local logical clock time: 235
+2023-03-07 21:54:10,334 INFO INTERNAL EVENT, global time: 45, local logical clock time:    236
+2023-03-07 21:54:10,340 INFO INTERNAL EVENT, global time: 46, local logical clock time:    237
+2023-03-07 21:54:10,346 INFO RECEIVED MESSAGE:            243, global time: 46, local logical clock time: 244, message queue length: 0
+2023-03-07 21:54:10,351 INFO RECEIVED MESSAGE:            248, global time: 47, local logical clock time: 249, message queue length: 1
+2023-03-07 21:54:10,357 INFO RECEIVED MESSAGE:            245, global time: 47, local logical clock time: 253, message queue length: 1
+2023-03-07 21:54:10,363 INFO RECEIVED MESSAGE:            252, global time: 48, local logical clock time: 254, message queue length: 0
+2023-03-07 21:54:10,369 INFO RECEIVED MESSAGE:            255, global time: 48, local logical clock time: 259, message queue length: 1
+2023-03-07 21:54:10,375 INFO RECEIVED MESSAGE:            258, global time: 49, local logical clock time: 261, message queue length: 1
+2023-03-07 21:54:10,381 INFO RECEIVED MESSAGE:            260, global time: 49, local logical clock time: 262, message queue length: 0
+2023-03-07 21:54:10,387 INFO INTERNAL EVENT, global time: 50, local logical clock time:    263
+2023-03-07 21:54:10,393 INFO RECEIVED MESSAGE:            268, global time: 50, local logical clock time: 269, message queue length: 0
+2023-03-07 21:54:10,398 INFO INTERNAL EVENT, global time: 51, local logical clock time:    270
+2023-03-07 21:54:10,404 INFO INTERNAL EVENT, global time: 51, local logical clock time:    271
+2023-03-07 21:54:10,410 INFO RECEIVED MESSAGE:            277, global time: 52, local logical clock time: 278, message queue length: 0
+2023-03-07 21:54:10,416 INFO RECEIVED MESSAGE:            280, global time: 52, local logical clock time: 281, message queue length: 0
+2023-03-07 21:54:10,421 INFO SENT MESSAGE:                282, TO: 7978, 7979, global time:       53, local logical clock time: 282
+2023-03-07 21:54:10,427 INFO INTERNAL EVENT, global time: 53, local logical clock time:    283
+2023-03-07 21:54:10,433 INFO SENT MESSAGE:                284, TO: 7978, 7979, global time:       54, local logical clock time: 284
+2023-03-07 21:54:10,439 INFO INTERNAL EVENT, global time: 54, local logical clock time:    285
+2023-03-07 21:54:10,445 INFO RECEIVED MESSAGE:            289, global time: 55, local logical clock time: 294, message queue length: 1
+2023-03-07 21:54:10,451 INFO RECEIVED MESSAGE:            293, global time: 55, local logical clock time: 295, message queue length: 0
+2023-03-07 21:54:10,457 INFO RECEIVED MESSAGE:            298, global time: 56, local logical clock time: 299, message queue length: 0
+2023-03-07 21:54:10,463 INFO RECEIVED MESSAGE:            301, global time: 56, local logical clock time: 302, message queue length: 0
+2023-03-07 21:54:10,468 INFO INTERNAL EVENT, global time: 57, local logical clock time:    303
+2023-03-07 21:54:10,474 INFO SENT MESSAGE:                304, TO: 7978, global time:       57, local logical clock time: 304
+2023-03-07 21:54:10,480 INFO SENT MESSAGE:                305, TO: 7979, global time:       58, local logical clock time: 305
+2023-03-07 21:54:10,486 INFO RECEIVED MESSAGE:            309, global time: 58, local logical clock time: 310, message queue length: 0
+2023-03-07 21:54:10,491 INFO INTERNAL EVENT, global time: 59, local logical clock time:    311
+2023-03-07 21:54:10,498 INFO SENT MESSAGE:                312, TO: 7978, global time:       59, local logical clock time: 312
+2023-03-07 21:54:10,504 INFO RECEIVED MESSAGE:            320, global time: 60, local logical clock time: 321, message queue length: 0
+2023-03-07 21:54:10,509 INFO INTERNAL EVENT, global time: 60, local logical clock time:    322
