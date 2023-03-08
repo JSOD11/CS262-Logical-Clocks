@@ -8,6 +8,7 @@ In almost every plot charting the logical clock values, we see that the highest 
 
 The queue length charts make the advantage of the faster machines clear. Machines with slower clocks are consistently overpowered by machines with faster clocks, while cases in which all the machines are running at a similar speed will result in smaller queue lengths. Cases in which two clocks have high clock rates and one clock has a low rate (such as 1, 6, 6) cause the slow machine to be pushed to very high queue lengths.
 
+# Design Notebook
 
 Tuesday 3.7
 - Made one minor change to ensure that the local logical clocks will be set equal to the max of their current time and a message they could be receiving
