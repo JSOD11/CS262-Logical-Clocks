@@ -1,25 +1,25 @@
 Tuesday 3.7
-Made one minor change to ensure that the local logical clocks will be set equal to the max of their current time and a message they could be receiving
-Create unit tests for all the functions to ensure everything is working correctly
-Add in some internal data structures so that we can easily create some plots to look at trends in the logical clocks
-Added tests: 
-- make sure the successive values of logical clocks on all machines never decrease in value
-- make sure logs are not empty
-- make sure at least one machine receives a message
-- make sure at least one machine sends a message
-- make sure an internal event is logged at least once
-- test each machine ends on a logical clock time greater than or equal to the global system time
-- manually set clock rates and test that machine with lower clock rate ends on rate close to faster machines
-- manually set clock rates and test that faster machine does not jump in logical clock value
-- manually set clock rates to be equal and test that all machines end on similar values
-- manually set clock rates and make sure that slower machine's message queue increases
+- Made one minor change to ensure that the local logical clocks will be set equal to the max of their current time and a message they could be receiving
+- Create unit tests for all the functions to ensure everything is working correctly
+- Add in some internal data structures so that we can easily create some plots to look at trends in the logical clocks
+- Added tests: 
+ - make sure the successive values of logical clocks on all machines never decrease in value
+ - make sure logs are not empty
+ - make sure at least one machine receives a message
+ - make sure at least one machine sends a message
+ - make sure an internal event is logged at least once
+ - test each machine ends on a logical clock time greater than or equal to the global system time
+ - manually set clock rates and test that machine with lower clock rate ends on rate close to faster machines
+ - manually set clock rates and test that faster machine does not jump in logical clock value
+ - manually set clock rates to be equal and test that all machines end on similar values
+ - manually set clock rates and make sure that slower machine's message queue increases
 - Added plotting functionality
-- ability to overlay plots, see the differences in logical clock tick values
+ - ability to overlay plots, see the differences in logical clock tick values
 - OBSERVATIONS:
-- added functionality to pick lower and upper bounds for the rates
-- when there is less variance in the rates that can be generated, the lines are much closer to each other
-- added functionality to decrease the rate that an event is internal
-- it seems like this makes the lines flatter and less “jumpy,” maybe this could be because there is more consistent communication between all the machines so the rate at which the logical clock grows is more consistent
+ - added functionality to pick lower and upper bounds for the rates
+  - when there is less variance in the rates that can be generated, the lines are much closer to each other
+ - added functionality to decrease the rate that an event is internal
+  - it seems like this makes the lines flatter and less “jumpy,” maybe this could be because there is more consistent communication between all the machines so the rate at which the logical clock grows is more consistent
 
 
 Monday 3.6
