@@ -19,7 +19,12 @@ class MultiVirtualMachine():
     self.clock_times = []
 
     # NOTE: first line of the text files is the clock rate
-    f = open("data/" + str(self.port) + ".txt", 'a')
+    f = open("data/" + str(self.port) + "-rates.txt", 'a') # set first line for rates data
+    f.write(str(self.clock_rate) + '\n')
+    f.close()
+
+    # NOTE: first line of the text files is the clock rate
+    f = open("data/" + str(self.port) + "-queue.txt", 'a') # set first line for queue lengths data
     f.write(str(self.clock_rate) + '\n')
     f.close()
 
@@ -71,8 +76,12 @@ class MultiVirtualMachine():
         self.local_logical_clock_time += 1
         self.clock_times.append(self.local_logical_clock_time) # used for hist
 
-        f = open("data/" + str(self.port) + ".txt", 'a') # write to txt file
+        f = open("data/" + str(self.port) + "-rates.txt", 'a') # write to rates txt file
         f.write(str(self.local_logical_clock_time) + '\n')
+        f.close()
+
+        f = open("data/" + str(self.port) + "-queue.txt", 'a') # write to queue lengths txt file
+        f.write(str(len(self.message_queue)) + '\n')
         f.close()
 
       self.global_time += 1

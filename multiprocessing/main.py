@@ -17,11 +17,11 @@ for port in ports:
   if os.path.isfile(f'logs/{port}.log'): # clear log files
     os.remove(f'logs/{port}.log')
 
-  if os.path.isfile(f'data/{port}.txt'): # clear saved data
-    os.remove(f'data/{port}.txt')
-  
-  if os.path.isfile(f'plots/{port}.txt'): # clear plots
-    os.remove(f'data/{port}.txt')
+  if os.path.isfile(f'data/{port}-rates.txt'): # clear saved data
+    os.remove(f'data/{port}-rates.txt')
+
+  if os.path.isfile(f'data/{port}-queue.txt'): # clear saved data
+    os.remove(f'data/{port}-queue.txt')
 
 
 def setup_logger(name, log_file, level=logging.INFO): # logging function
@@ -37,11 +37,10 @@ logger2 = setup_logger('second_logger', 'logs/7978.log')
 logger3 = setup_logger('third_logger', 'logs/7979.log')
 
 
-def load_data(ports): # function to load data from txt files into 3 arrays
-  pids = ["data/" + str(ports[0]) + ".txt", "data/" + str(ports[1]) + ".txt", "data/" + str(ports[2]) + ".txt"]
-  testing = []
+def load_data(files): # function to load data from txt files into 3 arrays
+  data = []
   clock_rates = []
-  for p in pids:
+  for p in files:
     test = []
     f = open(p, "r")
     for j, line in enumerate(f):
@@ -49,24 +48,24 @@ def load_data(ports): # function to load data from txt files into 3 arrays
         clock_rates.append(int(line.strip()))
       else:
         test.append(int(line.strip()))
-    testing.append(test)
+    data.append(test)
     f.close()
   
-  return clock_rates, testing
+  return clock_rates, data
 
 
-def generate_overlay_plot(clock_rates, testing): # generate overlay plots for each logical clock
+def generate_overlay_plot(clock_rates, data, title, ylabel, filetype): # generate overlay plots for each logical clock
   plt.figure()
-  plt.title(f'Logical Clock Rates: {clock_rates[0]}, {clock_rates[1]}, {clock_rates[2]}')
+  plt.title(f'{title}: {clock_rates[0]}, {clock_rates[1]}, {clock_rates[2]}')
   plt.xlabel('Clock Tick')
-  plt.ylabel('Logical Clock Value')
+  plt.ylabel(f'{ylabel}')
 
-  for rate, test in zip(clock_rates, testing):
+  for rate, test in zip(clock_rates, data):
     plt.plot(test, label=f'Clock rate: {rate}')
 
   plt.legend()
   clock_rates.sort()
-  plt.savefig(f'plots/{clock_rates[0]}{clock_rates[1]}{clock_rates[2]}.png')
+  plt.savefig(f'plots/{clock_rates[0]}{clock_rates[1]}{clock_rates[2]}-{filetype}.png')
 
 
 if __name__ == '__main__':
@@ -109,5 +108,12 @@ if __name__ == '__main__':
 
   print('All processes terminated\n')
 
-  clock_rates, testing = load_data(ports)
-  generate_overlay_plot(clock_rates, testing)
+  # generate a plot from clock ticker history data
+  clock_tick_files = ["data/" + str(ports[0]) + "-rates.txt", "data/" + str(ports[1]) + "-rates.txt", "data/" + str(ports[2]) + "-rates.txt"]
+  clock_rates, data = load_data(clock_tick_files)
+  generate_overlay_plot(clock_rates, data, title='Logical Clock Rates', ylabel='Logical Clock Value', filetype='rates')
+
+  # generate a plot from queue length data
+  queue_files = ["data/" + str(ports[0]) + "-queue.txt", "data/" + str(ports[1]) + "-queue.txt", "data/" + str(ports[2]) + "-queue.txt"]
+  clock_rates, data = load_data(queue_files)
+  generate_overlay_plot(clock_rates, data, title='Queue lengths', ylabel='Queue length', filetype='queue')
