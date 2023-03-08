@@ -3,7 +3,6 @@ from collections import deque
 import random
 import time
 import os
-import matplotlib.pyplot as plt
 
 class MultiVirtualMachine():
   def __init__(self, hostname, port):

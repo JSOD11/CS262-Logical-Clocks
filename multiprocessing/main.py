@@ -14,12 +14,12 @@ TODO: Add Unit Tests
 formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
 
 # delete previous logging files if they exist
-if os.path.isfile('1111.log'):
-  os.remove('1111.log')
-if os.path.isfile('2222.log'):
-  os.remove('2222.log')
-if os.path.isfile('3333.log'):
-  os.remove('3333.log')
+if os.path.isfile('7977.log'):
+  os.remove('7977.log')
+if os.path.isfile('7978.log'):
+  os.remove('7978.log')
+if os.path.isfile('7979.log'):
+  os.remove('7979.log')
 
 # found on stackoverflow, had to get around because other wise all machines were logging to the same file
 def setup_logger(name, log_file, level=logging.INFO):
@@ -30,9 +30,9 @@ def setup_logger(name, log_file, level=logging.INFO):
   logger.addHandler(handler)
   return logger
 
-logger1 = setup_logger('first_logger', '1111.log')
-logger2 = setup_logger('second_logger', '2222.log')
-logger3 = setup_logger('third_logger', '3333.log')
+logger1 = setup_logger('first_logger', '7977.log')
+logger2 = setup_logger('second_logger', '7978.log')
+logger3 = setup_logger('third_logger', '7979.log')
 
 if __name__ == '__main__':
 
@@ -41,7 +41,7 @@ if __name__ == '__main__':
   hostname = '0.0.0.0'
 
   # define machines
-  ports = [1111, 2222, 3333]
+  ports = [7977, 7978, 7979]
   machine1 = MultiVirtualMachine(hostname, ports[0])
   machine2 = MultiVirtualMachine(hostname, ports[1])
   machine3 = MultiVirtualMachine(hostname, ports[2])
